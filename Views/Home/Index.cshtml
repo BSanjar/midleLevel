@@ -1,0 +1,51 @@
+﻿@model IEnumerable<midleLevel.Models.Languages>
+<h2>Translate texts file</h2>
+<form asp-action="AddFile" asp-controller="Home" method="post" enctype="multipart/form-data">
+    <h4>File for parse</h4>
+    <input type="file" name="uploadedFile" accept=".docx, .doc" /><br>
+    <hr />
+    <h4>From language</h4>
+    <div class="form-group col-md-4">
+
+        <select name="fromText">
+            @foreach (var i in Model)
+            {
+                <option value="@i.lnCode">@i.language</option>
+            }
+        </select>
+
+    </div>
+    <br />
+    <h4>To language</h4>
+    <div class="form-group col-md-4">
+
+        <select name="toText">
+            @foreach (var i in Model)
+            {
+                <option value="@i.lnCode">@i.language</option>
+            }
+        </select>
+
+    </div>
+
+    <br>
+
+    <input type="submit" value="Translate" />
+</form>
+
+
+@if (ViewBag.Result != null && ViewBag.Result != "")
+{
+    if (ViewBag.Result == "success")
+    {
+        <h4 style="color:lightseagreen">text successfully translated</h4>
+        <textarea cols="5">
+         @ViewBag.Text
+     </textarea>
+    }
+    else
+    {
+<h4 style="color:darkred">@ViewBag.Result</h4>
+    }
+}
+
